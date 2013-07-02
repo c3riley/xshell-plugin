@@ -1,0 +1,19 @@
+<div>
+  <p>
+Specify if you want the comment to show in the log<br/>
+If Yes, before the command line is run, the command will appear.  This can be helpful when debugging issues.<br/>
+  </p>
+  <p>Example:<pre>
+  
+/*
+Comment about below xshell action:
+This is just a test,
+Located at https://github.com/ES/testScripts
+*/
+[workspace] $ cmd.exe /C '"echo Example && exit %%ERRORLEVEL%%"'
+Example
+Finished: SUCCESS  
+  
+  </pre>
+  </p>
+</div>

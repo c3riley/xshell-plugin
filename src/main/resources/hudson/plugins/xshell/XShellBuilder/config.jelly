@@ -1,5 +1,4 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-
     <f:entry title="${%Command line}" help="${rootURL}/../plugin/xshell/help-commandline.html">
         <f:textbox name="xshellBuilder.commandLine" value="${instance.commandLine}" />
     </f:entry>
@@ -8,5 +7,8 @@
     </f:entry>
     <f:entry title="${%Comment}" help="${rootURL}/../plugin/xshell/help-comment.html">
          <f:textarea field="xshellBuilder.comment" name="xshellBuilder.comment" value="${instance.comment}" />
+    </f:entry>
+    <f:entry title="${%Show Comment in Log}" help="${rootURL}/../plugin/xshell/help-comment.html">
+         <f:checkbox name="xshellBuilder.commentShowInLog" checked="${instance.commentShowInLog}" />
     </f:entry>
 </j:jelly>

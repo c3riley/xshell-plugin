@@ -51,6 +51,11 @@ public final class XShellBuilder extends Builder {
    * Specify if command is executed from working dir.
    */
   private final Boolean executeFromWorkingDir;
+  
+  /**
+   * Specify if comment should appear in log.
+   */
+  private final Boolean commentShowInLog;
 
   public String getCommandLine() {
     return commandLine;
@@ -64,12 +69,17 @@ public final class XShellBuilder extends Builder {
     return executeFromWorkingDir;
   }
   
+  public Boolean getCommentShowInLog() {
+	    return commentShowInLog;
+	  }
+  
 
   @DataBoundConstructor
-  public XShellBuilder(final String commandLine, final Boolean executeFromWorkingDir, String comment) {
+  public XShellBuilder(final String commandLine, final Boolean executeFromWorkingDir, String comment, Boolean commentShowInLog) {
     this.commandLine = Util.fixEmptyAndTrim(commandLine);
     this.executeFromWorkingDir = executeFromWorkingDir;
     this.comment = Util.fixEmptyAndTrim(comment);
+    this.commentShowInLog = commentShowInLog;
   }
 
   @Override
@@ -112,6 +122,12 @@ public final class XShellBuilder extends Builder {
     LOG.log(Level.FINE, "Working directory: " + build.getWorkspace());
 
     try {
+    	
+      if(commentShowInLog && comment!=null){
+        String commentInLogMsg = "\n/* Comment about below xshell action:\n" + comment + "\n*/\n";
+        launcher.decorateFor(build.getBuiltOn()).launch().stdout(listener).stdout().write(commentInLogMsg.getBytes());
+      }
+      
       final int result = launcher.decorateFor(build.getBuiltOn()).launch()
               .cmds(args).envs(env).stdout(listener).pwd(build.getWorkspace()).join();
       return result == 0;
