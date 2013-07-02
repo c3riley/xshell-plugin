@@ -40,6 +40,12 @@ public final class XShellBuilder extends Builder {
    * Command line.
    */
   private final String commandLine;
+  
+  /**
+   * comment.
+   */
+  private final String comment;
+  
 
   /**
    * Specify if command is executed from working dir.
@@ -50,14 +56,20 @@ public final class XShellBuilder extends Builder {
     return commandLine;
   }
 
+  public String getComment() {
+	    return comment;
+	  }
+  
   public Boolean getExecuteFromWorkingDir() {
     return executeFromWorkingDir;
   }
+  
 
   @DataBoundConstructor
-  public XShellBuilder(final String commandLine, final Boolean executeFromWorkingDir) {
+  public XShellBuilder(final String commandLine, final Boolean executeFromWorkingDir, String comment) {
     this.commandLine = Util.fixEmptyAndTrim(commandLine);
     this.executeFromWorkingDir = executeFromWorkingDir;
+    this.comment = Util.fixEmptyAndTrim(comment);
   }
 
   @Override
